@@ -11,6 +11,8 @@ import { RideProvidersDataService } from '../service/data/ride-providers-data.se
 export class RegistrationComponent implements OnInit {
   registrationForm!: FormGroup;
 
+  registrationStatus: string = "";
+
   constructor(private formBuilder: FormBuilder, private service: RideProvidersDataService) {}
 
   ngOnInit() {
@@ -76,15 +78,12 @@ export class RegistrationComponent implements OnInit {
     const formData = this.registrationForm.value;
   
     this.service.registerRideProvider(formData).subscribe(
-      response => {
-        // Handle success response from the backend
-
-        console.log(response.message);
-        console.log('Registration successful', response.message);
+      (response: any) => {
+        this.registrationStatus = response.message;
       },
-      error => {
-        // Handle error response from the backend
-        console.error('Registration failed', error.message);
+      (error: any) => {
+        console.log("error..");
+        console.error(error);
       }
     );
   }
