@@ -9,7 +9,7 @@ export class RideProvidersDataService {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = "http://localhost:8081/api/rideProviders/new"; // Replace with your backend API URL
+  private apiUrl = "http://localhost:8081/api/rideProviders/new";
 
   registerRideProvider(formData: any): Observable<any> {
     return this.http.post(this.apiUrl, formData);
