@@ -1,0 +1,106 @@
+<div class="container">
+    <h2>Ride Registration</h2>
+    <form [formGroup]="rideForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="createrUserId">Creator User ID</label>
+            <input type="text" class="form-control" id="createrUserId"
+                formControlName="createrUserId" required>
+            <div
+                *ngIf="rideForm.get('createrUserId')?.invalid && rideForm.get('createrUserId')?.touched"
+                class="text-danger">
+                Creator User ID is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="vehicleId">Vehicle ID</label>
+            <input type="text" class="form-control" id="vehicleId"
+                formControlName="vehicleId" required>
+            <div
+                *ngIf="rideForm.get('vehicleId')?.invalid && rideForm.get('vehicleId')?.touched"
+                class="text-danger">
+                Vehicle ID is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rideDate">Ride Date</label>
+            <input type="date" class="form-control" id="rideDate"
+                formControlName="rideDate" required>
+            <div
+                *ngIf="rideForm.get('rideDate')?.invalid && rideForm.get('rideDate')?.touched"
+                class="text-danger">
+                Ride Date is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rideTime">Ride Time</label>
+            <input type="time" class="form-control" id="rideTime"
+                formControlName="rideTime" required>
+            <div
+                *ngIf="rideForm.get('rideTime')?.invalid && rideForm.get('rideTime')?.touched"
+                class="text-danger">
+                Ride Time is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="rideStatus">Ride Status</label>
+            <input type="text" class="form-control" id="rideStatus"
+                formControlName="rideStatus" required>
+            <div
+                *ngIf="rideForm.get('rideStatus')?.invalid && rideForm.get('rideStatus')?.touched"
+                class="text-danger">
+                Ride Status is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="seatsFilled">Seats Filled</label>
+            <input type="number" class="form-control" id="seatsFilled"
+                formControlName="seatsFilled" required>
+            <div
+                *ngIf="rideForm.get('seatsFilled')?.invalid && rideForm.get('seatsFilled')?.touched"
+                class="text-danger">
+                Seats Filled is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fromLoc">From Location</label>
+            <input type="text" class="form-control" id="fromLoc"
+                formControlName="fromLoc" required>
+            <div
+                *ngIf="rideForm.get('fromLoc')?.invalid && rideForm.get('fromLoc')?.touched"
+                class="text-danger">
+                From Location is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="toLoc">To Location</label>
+            <input type="text" class="form-control" id="toLoc"
+                formControlName="toLoc" required>
+            <div
+                *ngIf="rideForm.get('toLoc')?.invalid && rideForm.get('toLoc')?.touched"
+                class="text-danger">
+                To Location is required.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="numberOfSeats">Number of Seats</label>
+            <input type="number" class="form-control" id="numberOfSeats"
+                formControlName="numberOfSeats" required>
+            <div
+                *ngIf="rideForm.get('numberOfSeats')?.invalid && rideForm.get('numberOfSeats')?.touched"
+                class="text-danger">
+                Number of Seats is required.
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="rideForm.invalid">Save</button>
+    </form>
+</div>

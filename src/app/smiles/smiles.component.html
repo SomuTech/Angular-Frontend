@@ -1,0 +1,41 @@
+<div class="container">
+    <h2>Generate Smiles</h2>
+    <form [formGroup]="generateSmilesForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="month">Month:</label>
+            <select id="month" formControlName="month" required>
+                <option value disabled selected>Select a month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <!-- Add options for all months -->
+            </select>
+            <div
+                *ngIf="generateSmilesForm.get('month')?.invalid && (generateSmilesForm.get('month')?.dirty || generateSmilesForm.get('month')?.touched)">
+                <div
+                    *ngIf="generateSmilesForm.get('month')?.errors?.['required']">Month
+                    is required.</div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="generateSmilesForm.invalid">Generate
+            Report</button>
+    </form>
+
+    <div *ngIf="smilesReport">
+        <h3>Smiles Report for {{ generateSmilesForm.value.month }}</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ride Provider</th>
+                    <th>Number of Smiles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rideProvider of smilesReport">
+                    <td>{{ rideProvider.name }}</td>
+                    <td>{{ rideProvider.smiles }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

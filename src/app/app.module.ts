@@ -7,13 +7,25 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { UpdationComponent } from './updation/updation.component';
+import { SmilesComponent } from './smiles/smiles.component';
+import { RegisterRideComponent } from './register-ride/register-ride.component';
+import { UpdateRideComponent } from './update-ride/update-ride.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BillingComponent } from './billing/billing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UpdationComponent,
+    SmilesComponent,
+    RegisterRideComponent,
+    UpdateRideComponent,
+    DashboardComponent,
+    BillingComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],

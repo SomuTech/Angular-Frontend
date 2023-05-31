@@ -1,92 +1,190 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="adharCard">Adhar Card:</label>
-    <input type="number" id="adharCard" formControlName="adharCard" required />
-    <div *ngIf="registrationForm.get('adharCard')?.invalid && (registrationForm.get('adharCard')?.dirty || registrationForm.get('adharCard')?.touched)">
-      <div *ngIf="registrationForm.get('adharCard')?.errors?.['required']">Adhar Card is required.</div>
-      <div *ngIf="registrationForm.get('adharCard')?.errors?.['min']">Aadhar number should be 12 digits long.</div>
-      <div *ngIf="registrationForm.get('adharCard')?.errors?.['max']">Aadhar number should be 12 digits long.</div>
+<div *ngIf="!registrationStatus">
+  <h2>Personal Details</h2>
+  <form [formGroup]="rideProviderForm">
+
+    <!-- ************************************* -->
+    <div>
+      <label for="adharCard">Adhar Card:</label>
+      <input type="number" id="adharCard" formControlName="adharCard" required />
+      <div
+        *ngIf="rideProviderForm.get('adharCard')?.invalid && (rideProviderForm.get('adharCard')?.dirty || rideProviderForm.get('adharCard')?.touched)">
+        <div *ngIf="rideProviderForm.get('adharCard')?.errors?.['required']">Adhar
+          Card is required.</div>
+        <div *ngIf="rideProviderForm.get('adharCard')?.errors?.['min']">Aadhar
+          number should be 12 digits long.</div>
+        <div *ngIf="rideProviderForm.get('adharCard')?.errors?.['max']">Aadhar
+          number should be 12 digits long.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="emailId">Email ID:</label>
-    <input type="email" id="emailId" formControlName="emailId" required />
-    <div *ngIf="registrationForm.get('emailId')?.invalid && (registrationForm.get('emailId')?.dirty || registrationForm.get('emailId')?.touched)">
-      <div *ngIf="registrationForm.get('emailId')?.errors?.['required']">Email ID is required.</div>
-      <div *ngIf="registrationForm.get('emailId')?.errors?.['email']">Please enter a valid email address.</div>
-      <div *ngIf="registrationForm.get('emailId')?.errors?.['pattern']">Email must belong to Cognizant domain.</div>
+    <div>
+      <label for="emailId">Email ID:</label>
+      <input type="email" id="emailId" formControlName="emailId" required />
+      <div
+        *ngIf="rideProviderForm.get('emailId')?.invalid && (rideProviderForm.get('emailId')?.dirty || rideProviderForm.get('emailId')?.touched)">
+        <div *ngIf="rideProviderForm.get('emailId')?.errors?.['required']">Email
+          ID is required.</div>
+        <div *ngIf="rideProviderForm.get('emailId')?.errors?.['email']">Please
+          enter a valid email address.</div>
+        <div *ngIf="rideProviderForm.get('emailId')?.errors?.['pattern']">Email
+          must belong to Cognizant domain.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="phone">Phone:</label>
-    <input type="number" id="phone" formControlName="phone" required />
-    <div *ngIf="registrationForm.get('phone')?.invalid && (registrationForm.get('phone')?.dirty || registrationForm.get('phone')?.touched)">
-      <div *ngIf="registrationForm.get('phone')?.errors?.['required']">Phone number is required.</div>
-      <div *ngIf="registrationForm.get('phone')?.errors?.['min']">Phone number should be 12 digits long.</div>
-      <div *ngIf="registrationForm.get('phone')?.errors?.['max']">Phone number should be 12 digits long.</div>
+    <div>
+      <label for="phone">Phone:</label>
+      <input type="number" id="phone" formControlName="phone" required />
+      <div
+        *ngIf="rideProviderForm.get('phone')?.invalid && (rideProviderForm.get('phone')?.dirty || rideProviderForm.get('phone')?.touched)">
+        <div *ngIf="rideProviderForm.get('phone')?.errors?.['required']">Phone
+          number is required.</div>
+        <div *ngIf="rideProviderForm.get('phone')?.errors?.['min']">Phone number
+          should be 12 digits long.</div>
+        <div *ngIf="rideProviderForm.get('phone')?.errors?.['max']">Phone number
+          should be 10 digits long.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" formControlName="firstName" required />
-    <div *ngIf="registrationForm.get('firstName')?.invalid && (registrationForm.get('firstName')?.dirty || registrationForm.get('firstName')?.touched)">
-      <div *ngIf="registrationForm.get('firstName')?.errors?.['required']">First name is required.</div>
-      <div *ngIf="registrationForm.get('firstName')?.errors?.['minlength']">First name should be minimum 3 characters long.</div>
-      <div *ngIf="registrationForm.get('firstName')?.errors?.['pattern']">First name must contain only alphabets.</div>
+    <div>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" formControlName="firstName" required />
+      <div
+        *ngIf="rideProviderForm.get('firstName')?.invalid && (rideProviderForm.get('firstName')?.dirty || rideProviderForm.get('firstName')?.touched)">
+        <div *ngIf="rideProviderForm.get('firstName')?.errors?.['required']">First
+          name is required.</div>
+        <div *ngIf="rideProviderForm.get('firstName')?.errors?.['minlength']">First
+          name should be minimum 3 characters long.</div>
+        <div *ngIf="rideProviderForm.get('firstName')?.errors?.['pattern']">First
+          name must contain only alphabets.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" formControlName="lastName" required />
-    <div *ngIf="registrationForm.get('lastName')?.invalid && (registrationForm.get('lastName')?.dirty || registrationForm.get('lastName')?.touched)">
-      <div *ngIf="registrationForm.get('lastName')?.errors?.['required']">Last name is required.</div>
-      <div *ngIf="registrationForm.get('lastName')?.errors?.['minlength']">Last name should be minimum 3 characters long.</div>
-      <div *ngIf="registrationForm.get('lastName')?.errors?.['pattern']">Last name must contain only alphabets.</div>
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" formControlName="lastName" required />
+      <div
+        *ngIf="rideProviderForm.get('lastName')?.invalid && (rideProviderForm.get('lastName')?.dirty || rideProviderForm.get('lastName')?.touched)">
+        <div *ngIf="rideProviderForm.get('lastName')?.errors?.['required']">Last
+          name is required.</div>
+        <div *ngIf="rideProviderForm.get('lastName')?.errors?.['minlength']">Last
+          name should be minimum 3 characters long.</div>
+        <div *ngIf="rideProviderForm.get('lastName')?.errors?.['pattern']">Last
+          name must contain only alphabets.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="dlNo">Driving License No:</label>
-    <input type="text" id="dlNo" formControlName="dlNo" required />
-    <div *ngIf="registrationForm.get('dlNo')?.invalid && (registrationForm.get('dlNo')?.dirty || registrationForm.get('dlNo')?.touched)">
-      <div *ngIf="registrationForm.get('dlNo')?.errors?.['required']">Driving License is required.</div>
-      <div *ngIf="registrationForm.get('dlNo')?.errors?.['pattern']">Driving license must be 16 characters long and should include three hypens (-).</div>
+    <div>
+      <label for="dlNo">Driving License No:</label>
+      <input type="text" id="dlNo" formControlName="dlNo" required />
+      <div
+        *ngIf="rideProviderForm.get('dlNo')?.invalid && (rideProviderForm.get('dlNo')?.dirty || rideProviderForm.get('dlNo')?.touched)">
+        <div *ngIf="rideProviderForm.get('dlNo')?.errors?.['required']">Driving
+          License is required.</div>
+        <div *ngIf="rideProviderForm.get('dlNo')?.errors?.['pattern']">Driving
+          license must be 16 characters long and should include three hypens
+          (-).</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="validUpto">Valid Upto:</label>
-    <input type="date" id="validUpto" formControlName="validUpto" required />
-    <div *ngIf="registrationForm.get('validUpto')?.invalid && (registrationForm.get('validUpto')?.dirty || registrationForm.get('validUpto')?.touched)">
-      <div *ngIf="registrationForm.get('validUpto')?.errors?.['futureDateRange']">The validUpto date must be at least 30 days from now.</div>
+    <div>
+      <label for="validUpto">Valid Upto:</label>
+      <input type="date" id="validUpto" formControlName="validUpto" required />
+      <div
+        *ngIf="rideProviderForm.get('validUpto')?.invalid && (rideProviderForm.get('validUpto')?.dirty || rideProviderForm.get('validUpto')?.touched)">
+        <div
+          *ngIf="rideProviderForm.get('validUpto')?.errors?.['futureDateRange']">The
+          validUpto date must be at least 30 days from now.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="status">Status:</label>
-    <input type="text" id="status" formControlName="status" required />
-    <div *ngIf="registrationForm.get('status')?.invalid && (registrationForm.get('status')?.dirty || registrationForm.get('status')?.touched)">
-      <div *ngIf="registrationForm.get('status')?.errors?.['pattern']">Status must be 'Registered' or 'Un-Registered'.</div>
+    <div>
+      <label for="status">Status:</label>
+      <input type="text" id="status" formControlName="status" required />
+      <div
+        *ngIf="rideProviderForm.get('status')?.invalid && (rideProviderForm.get('status')?.dirty || rideProviderForm.get('status')?.touched)">
+        <div *ngIf="rideProviderForm.get('status')?.errors?.['pattern']">Status
+          must be 'Registered' or 'Un-Registered'.</div>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <label for="dateOfBirth">Date of Birth:</label>
-    <input type="date" id="dateOfBirth" formControlName="dateOfBirth" required />
-    <div *ngIf="registrationForm.get('dateOfBirth')?.invalid && (registrationForm.get('dateOfBirth')?.dirty || registrationForm.get('dateOfBirth')?.touched)">
-      <div *ngIf="registrationForm.get('dateOfBirth')?.errors?.['past']">Age should be greater than or equal to 18.</div>
+    <div>
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" required />
+      <div
+        *ngIf="rideProviderForm.get('dateOfBirth')?.invalid && (rideProviderForm.get('dateOfBirth')?.dirty || rideProviderForm.get('dateOfBirth')?.touched)">
+        <div *ngIf="rideProviderForm.get('dateOfBirth')?.errors?.['past']">Age
+          should be greater than or equal to 18.</div>
+      </div>
     </div>
-  </div>
 
-  <!-- Other form fields -->
+    <h2>Ride Info</h2>
+    <form [formGroup]="rideInfoForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="rideInfos">
+        <div *ngFor="let rideInfoGroup of rideInfos.controls; let i = index"
+          [formGroupName]="i">
+          <h3>Ride Info {{ i + 1 }}</h3>
 
-  <button type="submit" [disabled]="registrationForm.invalid">Submit</button>
-</form>
+          <div>
+            <label for="vehicleNo">Vehicle Number:</label>
+            <input type="text" id="vehicleNo" formControlName="vehicleNo">
+            <div
+              *ngIf="rideInfoForm.get('vehicleNo')?.invalid && rideInfoForm.get('vehicleNo')?.touched">
+              Vehicle Number is required.
+            </div>
+          </div>
+
+          <div>
+            <label for="carType">Car Type:</label>
+            <input type="text" id="carType" formControlName="carType">
+            <div
+              *ngIf="rideInfoForm.get('carType')?.invalid && rideInfoForm.get('carType')?.touched">
+              Car Type is required.
+            </div>
+          </div>
+
+          <div>
+            <label for="carName">Car Name:</label>
+            <input type="text" id="carName" formControlName="carName">
+            <div
+              *ngIf="rideInfoForm.get('carName')?.invalid && rideInfoForm.get('carName')?.touched">
+              Car Name is required.
+            </div>
+          </div>
+
+          <div>
+            <label for="fualType">Fuel Type:</label>
+            <input type="text" id="fualType" formControlName="fualType">
+            <div
+              *ngIf="rideInfoForm.get('fualType')?.invalid && rideInfoForm.get('fualType')?.touched">
+              Fuel Type is required.
+            </div>
+          </div>
+
+          <div>
+            <label for="noOfSeats">Number of Seats:</label>
+            <input type="number" id="noOfSeats" formControlName="noOfSeats">
+            <div
+              *ngIf="rideInfoForm.get('noOfSeats')?.invalid && rideInfoForm.get('noOfSeats')?.touched">
+              Number of Seats is required and should be non-negative.
+            </div>
+          </div>
+
+          <button type="button" (click)="removeRideInfo(i)">Remove</button>
+        </div>
+      </div>
+
+      <button type="button" (click)="addRideInfo()">Add Ride Info</button>
+
+      <!-- /**************** -->
+
+      <button type="submit"
+        [disabled]="rideProviderForm.invalid || rideInfoForm.invalid">Submit</button>
+    </form>
+  </form>
+</div>
 
 
 
-<h1>{{registrationStatus}}</h1>
+<div *ngIf="registrationStatus">
+  <h3>Registration successfull with Ride Provider Id: {{ registrationId }}</h3>
+</div>
