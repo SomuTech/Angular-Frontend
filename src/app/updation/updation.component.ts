@@ -1,27 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
-
-interface RideProviderDto {
-  adharCard: string;
-  emailId: string;
-  phone: number;
-  firstName: string;
-  lastName: string;
-  dlNo: string;
-  validUpto: string;
-  status: string;
-  dateOfBirth: string;
-  rideInfos: RideInfoDto[];
-}
-
-interface RideInfoDto {
-  vehicleNo: string;
-  carType: string;
-  carName: string;
-  fualType: string;
-  noOfSeats: number;
-}
+import { RideInfoDto, RideProviderDto } from '../interfaces';
 
 @Component({
   selector: 'app-updation',
@@ -32,8 +12,7 @@ export class UpdationComponent implements OnInit {
   rideProviderForm!: FormGroup;
   rideInfoForm!: FormGroup;
 
-  registrationStatus: boolean = false;
-  registrationId: string = '';
+  updationStatus: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -127,7 +106,6 @@ export class UpdationComponent implements OnInit {
       fualType: ['', Validators.required],
       noOfSeats: ['', [Validators.required, Validators.min(0)]],
     });
-
     this.rideInfos.push(rideInfoGroup);
   }
 
@@ -135,17 +113,10 @@ export class UpdationComponent implements OnInit {
     this.rideInfos.removeAt(index);
   }
 
-  onSubmit(): void {
-    if (this.rideProviderForm.invalid) {
-      console.log('Invalid details');
-      return;
-    }
-  }
-
   fetchUserData() {
     const id = sessionStorage.getItem('rpId');
     this.service.getRideProvider(id).subscribe(
-      (userData) => {
+      (userData: RideProviderDto) => {
         if (userData) {
           this.rideProviderForm.patchValue({
             adharCard: userData.adharCard,
@@ -159,7 +130,6 @@ export class UpdationComponent implements OnInit {
             dateOfBirth: userData.dateOfBirth,
           });
 
-          // Clear existing ride info form groups
           this.rideInfos.clear();
 
           userData.rideInfos.forEach((rideInfo: RideInfoDto) => {
@@ -173,7 +143,6 @@ export class UpdationComponent implements OnInit {
                 [Validators.required, Validators.min(0)],
               ],
             });
-
             this.rideInfos.push(rideInfoGroup);
           });
         }
@@ -184,24 +153,38 @@ export class UpdationComponent implements OnInit {
     );
   }
 
-  // saveUserData() {
-  //   const rideProviderDto: RideProviderDto= {
-  //     ...this.rideProviderForm.value,
-  //     rideInfoDetails: this.rideInfoForm.value
-  //   }
+  saveUserData() {
+    if (this.rideProviderForm.invalid || this.rideInfoForm.invalid) {
+      console.log('invalid details');
+      return;
+    }
+    const rideProviderDto: RideProviderDto = {
+      ...this.rideProviderForm.value,
+      rideInfoDetails: this.rideInfoForm.value,
+    };
 
-  //   if (this.rideProviderForm.valid) {
-  //     const userData = this.rideProviderForm.value;
-  //     this.service
-  //       .updateRideProvider(sessionStorage.getItem('rpId'), userData)
-  //       .subscribe(
-  //         (response) => {
-  //           console.log('success'); // Assuming the backend returns the updated user ID
-  //         },
-  //         (error) => {
-  //           console.error('Error updating user data:', error);
-  //         }
-  //       );
-  //   }
-  // }
+    this.service
+      .updateRideProvider(sessionStorage.getItem('rpId'), rideProviderDto)
+      .subscribe(
+        (response: any) => {
+          sessionStorage.setItem('rpId', response.rpId);
+          this.updationStatus = true;
+        },
+        (error: any) => {
+          console.error(error.message);
+        }
+      );
+  }
+
+  deleteRideProvider() {
+    console.log('ssff');
+    this.service.deleteRideProvider(sessionStorage.getItem('rpId')).subscribe(
+      (response: any) => {
+        this.updationStatus = true;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 }

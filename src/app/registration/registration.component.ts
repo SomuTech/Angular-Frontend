@@ -1,27 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
-
-interface RideProviderDto {
-  adharCard: string;
-  emailId: string;
-  phone: number;
-  firstName: string;
-  lastName: string;
-  dlNo: string;
-  validUpto: string;
-  status: string;
-  dateOfBirth: string;
-  rideInfos: RideInfoDto[];
-}
-
-interface RideInfoDto {
-  vehicleNo: string;
-  carType: string;
-  carName: string;
-  fualType: string;
-  noOfSeats: number;
-}
+import { RideProviderDto, RideInfoDto } from '../interfaces';
 
 @Component({
   selector: 'app-registration',
@@ -35,7 +15,10 @@ export class RegistrationComponent implements OnInit {
   registrationStatus: boolean = false;
   registrationId: string = '';
 
-  constructor(private formBuilder: FormBuilder, private service: RideProvidersDataService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: RideProvidersDataService
+  ) {}
 
   ngOnInit(): void {
     this.rideProviderDetailsForm();
@@ -44,21 +27,70 @@ export class RegistrationComponent implements OnInit {
 
   rideProviderDetailsForm(): void {
     this.rideProviderForm = this.formBuilder.group({
-      adharCard: ['',[Validators.required, Validators.min(1), Validators.max(999999999999)]],
-      emailId: ['',[Validators.required,Validators.email,Validators.pattern('.+@cognizant\\.com')]],
-      phone: ['',[Validators.required, Validators.min(1), Validators.max(9999999999)]],
-      firstName: ['',[Validators.required,Validators.minLength(3),Validators.pattern('[a-zA-Z]*$')]],
-      lastName: ['',[Validators.required,Validators.minLength(3),Validators.pattern('[a-zA-Z]*$')]],
-      dlNo: ['',[Validators.required,Validators.pattern('^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$')]],
+      adharCard: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(12),
+          Validators.maxLength(12),
+        ],
+      ],
+      emailId: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('.+@cognizant\\.com'),
+        ],
+      ],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(12),
+          Validators.maxLength(12),
+        ],
+      ],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('[a-zA-Z]*$'),
+        ],
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern('[a-zA-Z]*$'),
+        ],
+      ],
+      dlNo: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$'
+          ),
+        ],
+      ],
       validUpto: ['', Validators.required],
-      status: ['',[Validators.required,Validators.pattern('^(Registered|Un-Registered)$')]],
+      status: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(Registered|Un-Registered)$'),
+        ],
+      ],
       dateOfBirth: ['', [Validators.required]],
     });
   }
 
   rideInfoDetailsForm(): void {
     this.rideInfoForm = this.formBuilder.group({
-      rideInfos: this.formBuilder.array([]) 
+      rideInfos: this.formBuilder.array([]),
     });
   }
 
@@ -68,12 +100,12 @@ export class RegistrationComponent implements OnInit {
 
   addRideInfo(): void {
     const rideInfoGroup = this.formBuilder.group({
-        vehicleNo: ['', Validators.required],
-        carType: ['', Validators.required],
-        carName: ['', Validators.required],
-        fualType: ['', Validators.required],
-        noOfSeats: ['', [Validators.required, Validators.min(0)]]
-      });
+      vehicleNo: ['', Validators.required],
+      carType: ['', Validators.required],
+      carName: ['', Validators.required],
+      fualType: ['', Validators.required],
+      noOfSeats: ['', [Validators.required, Validators.min(0)]],
+    });
 
     this.rideInfos.push(rideInfoGroup);
   }
@@ -84,14 +116,14 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.rideProviderForm.invalid || this.rideInfoForm.invalid) {
-      console.log("invalid details");
+      console.log('invalid details');
       return;
     }
-  
-    const rideProviderDto: RideProviderDto= {
+
+    const rideProviderDto: RideProviderDto = {
       ...this.rideProviderForm.value,
-      rideInfoDetails: this.rideInfoForm.value
-    }
+      rideInfos: this.rideInfoForm.value.rideInfos,
+    };
 
     this.service.registerRideProvider(rideProviderDto).subscribe(
       (response: any) => {

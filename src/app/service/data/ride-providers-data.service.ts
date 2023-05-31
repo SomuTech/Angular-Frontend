@@ -2,18 +2,7 @@ import { Time } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-interface RideDto {
-  createrUserId: string;
-  vehicleId: string;
-  rideDate: Date;
-  rideTime: Time;
-  rideStatus: string;
-  seatsFilled: number;
-  fromLoc: string;
-  toLoc: string;
-  numberOfSeats: number;
-}
+import { RideProviderDto, RideDto } from 'src/app/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +10,12 @@ interface RideDto {
 export class RideProvidersDataService {
   constructor(private http: HttpClient) {}
 
-  private apiUrl = 'http://localhost:8081/api/rideProviders/';
+  private apiUrl = 'http://localhost:8081/api/rideProviders';
 
-  registerRideProvider(formData: any): Observable<any> {
-    const url = `${this.apiUrl}new`;
-    return this.http.post(url, formData);
+  registerRideProvider(
+    data: RideProviderDto
+  ): Observable<RideProviderDto['rpId']> {
+    return this.http.post<RideProviderDto['rpId']>(`${this.apiUrl}/new`, data);
   }
 
   getBilling(): Observable<any[]> {
@@ -34,19 +24,32 @@ export class RideProvidersDataService {
     );
   }
 
-  registerRide(rideDto: RideDto): Observable<any> {
-    const url = `${this.apiUrl}addbooking`;
-    return this.http.post(url, rideDto);
+  registerRide(rideDto: RideDto): Observable<RideDto['rideId']> {
+    const url = `${this.apiUrl}/addbooking`;
+    return this.http.post<RideDto['rideId']>(url, rideDto);
   }
 
-  updateRideProvider(rpId: any, formData: any): Observable<any> {
-    const url = `${this.apiUrl}${rpId}/update`; // Replace with the actual endpoint for updating user
-    return this.http.put(url, formData);
+  updateRideProvider(
+    rpId: RideProviderDto['rpId'] | null,
+    data: RideProviderDto
+  ): Observable<RideProviderDto['rpId']> {
+    const url = `${this.apiUrl}/
+    ${rpId}/update`;
+    return this.http.put<RideProviderDto['rpId']>(url, data);
   }
 
-  getRideProvider(rpId: any): Observable<any> {
-    const url = `${this.apiUrl}get/${rpId}`; // Replace with the actual endpoint for fetching user data
-    console.log(this.http.get<any>(url));
-    return this.http.get<any>(url);
+  getRideProvider(
+    rpId: RideProviderDto['rpId'] | null
+  ): Observable<RideProviderDto> {
+    const url = `${this.apiUrl}get/${rpId}`;
+    return this.http.get<RideProviderDto>(url);
+  }
+
+  deleteRideProvider(rpId: RideProviderDto['rpId'] | null) {
+    if (rpId) {
+      const url = `${this.apiUrl}${rpId}/update`;
+      return this.http.put(url, null);
+    }
+    throw new Error('not registered');
   }
 }

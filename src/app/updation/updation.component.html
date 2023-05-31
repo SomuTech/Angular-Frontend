@@ -1,7 +1,7 @@
 <h2>Update Ride Provider</h2>
-<form [formGroup]="rideProviderForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="rideProviderForm">
     <div>
-        <label for="adharCard">Adhar Card:</label>
+        <label for="adharCard">Aadhaar Card:</label>
         <input type="number" id="adharCard" formControlName="adharCard" required />
         <div
             *ngIf="rideProviderForm.get('adharCard')?.invalid && (rideProviderForm.get('adharCard')?.dirty || rideProviderForm.get('adharCard')?.touched)">
@@ -100,7 +100,18 @@
 
     <div>
         <label for="status">Status:</label>
-        <input type="text" id="status" formControlName="status" required />
+        <div>
+            <label>
+                <input type="radio" id="registered" value="Registered"
+                    formControlName="status"> Registered
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" id="unregistered" value="Un-Registered"
+                    formControlName="status"> Un-Registered
+            </label>
+        </div>
         <div
             *ngIf="rideProviderForm.get('status')?.invalid && (rideProviderForm.get('status')?.dirty || rideProviderForm.get('status')?.touched)">
             <div *ngIf="rideProviderForm.get('status')?.errors?.['pattern']">Status
@@ -120,7 +131,7 @@
     </div>
 
     <h2>Ride Info</h2>
-    <form [formGroup]="rideInfoForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="rideInfoForm" (ngSubmit)="saveUserData()">
         <div formArrayName="rideInfos">
             <div *ngFor="let rideInfoGroup of rideInfos.controls; let i = index"
                 [formGroupName]="i">
@@ -172,22 +183,19 @@
                         Number of Seats is required and should be non-negative.
                     </div>
                 </div>
-
-                <button type="button" (click)="removeRideInfo(i)">Remove</button>
+                <button type="button" (click)="removeRideInfo(i)">Remove Ride
+                    Info</button>
             </div>
         </div>
-
         <button type="button" (click)="addRideInfo()">Add Ride Info</button>
-        <div>
-            <button type="submit" [disabled]="rideProviderForm.invalid">Submit</button>
-        </div>
+        <button class="btn btn-secondary" type="submit"
+            [disabled]="rideProviderForm.invalid || rideInfoForm.invalid">Save</button>
     </form>
+</form>
 
-    <button type="button" (click)="fetchUserData()">Fetch User Data</button>
-    <!-- <button type="submit" [disabled]="rideProviderForm.invalid"
-        (click)="saveUserData()">Save</button> -->
+<div *ngIf="updationStatus">
+    <h3>Acknowledgement:</h3>
+    <p>Details updated successfully</p>
+</div>
 
-    <!-- <div *ngIf="acknowledgement">
-        <h3>Acknowledgement:</h3>
-        <p>{{ acknowledgement }}</p>
-    </div> -->
+<button type="button" class="btn btn-warning" (click)="deleteRideProvider()">Delete</button>

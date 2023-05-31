@@ -2,29 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
-import { Time } from '@angular/common';
-
-interface RideDto{
-  createrUserId: string;
-	vehicleId: string;
-	rideDate: Date;
-	rideTime: Time;
-	rideStatus: string;
-	seatsFilled: number;
-	fromLoc: string;
-	toLoc: string;
-	numberOfSeats: number;
-}
+import { RideDto } from '../interfaces';
 
 @Component({
   selector: 'app-register-ride',
   templateUrl: './register-ride.component.html',
-  styleUrls: ['./register-ride.component.css']
+  styleUrls: ['./register-ride.component.css'],
 })
 export class RegisterRideComponent implements OnInit {
   rideForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private service: RideProvidersDataService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private service: RideProvidersDataService
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -33,13 +25,13 @@ export class RegisterRideComponent implements OnInit {
   buildForm(): void {
     this.rideForm = this.formBuilder.group({
       createrUserId: ['', Validators.required],
-      vehicleId: ['', Validators.required],
-      rideDate: ['', Validators.required],
-      rideTime: ['', Validators.required],
-      rideStatus: ['', Validators.required],
-      seatsFilled: ['', Validators.required],
       fromLoc: ['', Validators.required],
+      rideDate: ['', Validators.required],
+      rideStatus: ['', Validators.required],
+      rideTime: ['', Validators.required],
+      seatsFilled: ['', Validators.required],
       toLoc: ['', Validators.required],
+      vehicleId: ['', Validators.required],
       numberOfSeats: ['', Validators.required],
     });
   }
@@ -50,21 +42,29 @@ export class RegisterRideComponent implements OnInit {
       return;
     }
     this.saveRide();
-    this.router.navigate(['dashboard']);
   }
 
   saveRide(): void {
-    const rideDto: RideDto = this.rideForm.value as RideDto;
+    const rideDto: RideDto = {
+      rideId: '',
+      createrUserId: this.rideForm.get('createrUserId')!.value,
+      fromLoc: this.rideForm.get('fromLoc')!.value,
+      rideDate: this.rideForm.get('rideDate')!.value,
+      rideStatus: this.rideForm.get('rideStatus')!.value,
+      rideTime: this.rideForm.get('rideTime')!.value,
+      seatsFilled: this.rideForm.get('seatsFilled')!.value,
+      toLoc: this.rideForm.get('toLoc')!.value,
+      vehicleId: this.rideForm.get('vehicleId')!.value,
+      numberOfSeats: this.rideForm.get('numberOfSeats')!.value,
+    };
     this.service.registerRide(rideDto).subscribe(
       (response: any) => {
-        console.log(response.message);
-        console.log(response.id);
+        console.log(this.rideForm.value);
         this.router.navigate(['dashboard']);
-        // console.log(response.message);
-        // console.log(response.id);
       },
-      (error)=>{
+      (error) => {
         console.error(error.message);
-      });
+      }
+    );
   }
 }

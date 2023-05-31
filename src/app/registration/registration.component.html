@@ -99,7 +99,18 @@
 
     <div>
       <label for="status">Status:</label>
-      <input type="text" id="status" formControlName="status" required />
+      <div>
+        <label>
+          <input type="radio" id="registered" value="Registered"
+            formControlName="status"> Registered
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="radio" id="unregistered" value="Un-Registered"
+            formControlName="status"> Un-Registered
+        </label>
+      </div>
       <div
         *ngIf="rideProviderForm.get('status')?.invalid && (rideProviderForm.get('status')?.dirty || rideProviderForm.get('status')?.touched)">
         <div *ngIf="rideProviderForm.get('status')?.errors?.['pattern']">Status
@@ -182,8 +193,6 @@
     </form>
   </form>
 </div>
-
-
 
 <div *ngIf="registrationStatus">
   <h3>Registration successfull with Ride Provider Id: {{ registrationId }}</h3>
