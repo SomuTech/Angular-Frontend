@@ -6,25 +6,24 @@
         </div>
         <button type="submit" class="btn btn-primary">Generate Report</button>
     </form>
-
-    <!-- Display billing information table -->
     <h3>Billing Information:</h3>
     <table class="table">
         <thead>
             <tr>
-                <th>Ride Provider</th>
-                <th>Month</th>
-                <th>Total Amount</th>
-                <!-- Add more table headers as needed -->
+                <th>Bill Id</th>
+                <th>Bill Amount</th>
+                <th>Ride Date</th>
+                <th>Source</th>
+                <th>Destination</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Iterate over billing information and display in table rows -->
-            <tr *ngFor="let billing of billings">
-                <td>{{ billing.providerName }}</td>
-                <td>{{ billing.month }}</td>
-                <td>{{ billing.totalAmount }}</td>
-                <!-- Add more table cells as needed -->
+            <tr *ngFor="let bill of billings">
+                <td>{{ bill.billId }}</td>
+                <td>{{ bill.bill }}</td>
+                <td>{{ bill.billDate }}</td>
+                <td>{{ bill.source }}</td>
+                <td>{{ bill.destination }}</td>
             </tr>
         </tbody>
     </table>

@@ -8,6 +8,7 @@ import { RideInfoDto, RideProviderDto } from '../interfaces';
   templateUrl: './updation.component.html',
   styleUrls: ['./updation.component.css'],
 })
+  
 export class UpdationComponent implements OnInit {
   rideProviderForm!: FormGroup;
   rideInfoForm!: FormGroup;
@@ -188,3 +189,5 @@ export class UpdationComponent implements OnInit {
     );
   }
 }
+
+

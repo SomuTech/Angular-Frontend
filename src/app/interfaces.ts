@@ -35,3 +35,18 @@ export interface RideDto {
   toLoc: string;
   numberOfSeats: number;
 }
+
+export interface TripDto {
+  createrUserId: string;
+  seatsFilled: number;
+  fromLoc: string;
+  toLoc: string;
+}
+
+export interface BillDto {
+  billId: string;
+  bill: number;
+  billDate: Date;
+  source: string;
+  destination: string;
+}
