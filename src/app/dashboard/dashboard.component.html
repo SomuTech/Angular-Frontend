@@ -1,51 +1,52 @@
 <div class="container">
-    <h2>Driver Dashboard</h2>
-    <!-- Display ride booking information -->
-    <h3>Ride Booking Information:</h3>
+  <h2>Driver Dashboard</h2>
+
+  <button (click)="getBookingStatus()">Booking Status</button>
+  <!-- Display ride booking information -->
+  <h3>Ride Booking Information:</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ride Seeker</th>
+        <th>Booking Time</th>
+        <!-- Add more table headers as needed -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Iterate over ride booking information and display in table rows -->
+      <tr *ngFor="let booking of rideBookings">
+        <td>{{ booking.seekerName }}</td>
+        <td>{{ booking.bookingTime }}</td>
+        <!-- Add more table cells as needed -->
+      </tr>
+    </tbody>
+  </table>
+  <!-- Display start/end trip buttons -->
+  <div>
+    <button (click)="startTrip()">Start Trip</button>
+    <button (click)="endTrip()">End Trip</button>
+  </div>
+  <!-- Display trip bill per person upon ending the trip -->
+  <div *ngIf="showTripBill">
+    <h3>Trip Bill Per Person:</h3>
+    <!-- Display trip bill details per person -->
+    <!-- Replace the table structure and data with your actual trip bill details -->
     <table class="table">
       <thead>
         <tr>
           <th>Ride Seeker</th>
-          <th>Booking Time</th>
+          <th>Amount</th>
           <!-- Add more table headers as needed -->
         </tr>
       </thead>
       <tbody>
-        <!-- Iterate over ride booking information and display in table rows -->
-        <tr *ngFor="let booking of rideBookings">
-          <td>{{ booking.seekerName }}</td>
-          <td>{{ booking.bookingTime }}</td>
+        <!-- Iterate over trip bill details and display in table rows -->
+        <tr *ngFor="let trip of tripBills">
+          <td>{{ trip.seekerName }}</td>
+          <td>{{ trip.amount }}</td>
           <!-- Add more table cells as needed -->
         </tr>
       </tbody>
     </table>
-    <!-- Display start/end trip buttons -->
-    <div>
-      <button (click)="startTrip()">Start Trip</button>
-      <button (click)="endTrip()">End Trip</button>
-    </div>
-    <!-- Display trip bill per person upon ending the trip -->
-    <div *ngIf="showTripBill">
-      <h3>Trip Bill Per Person:</h3>
-      <!-- Display trip bill details per person -->
-      <!-- Replace the table structure and data with your actual trip bill details -->
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Ride Seeker</th>
-            <th>Amount</th>
-            <!-- Add more table headers as needed -->
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Iterate over trip bill details and display in table rows -->
-          <tr *ngFor="let trip of tripBills">
-            <td>{{ trip.seekerName }}</td>
-            <td>{{ trip.amount }}</td>
-            <!-- Add more table cells as needed -->
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
-  
+</div>

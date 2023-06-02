@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
-import { RideDto } from '../interfaces';
+import { RideDto, RideProviderDto } from '../interfaces';
 
 @Component({
   selector: 'app-register-ride',
@@ -58,8 +58,21 @@ export class RegisterRideComponent implements OnInit {
       numberOfSeats: this.rideForm.get('numberOfSeats')!.value,
     };
     this.service.registerRide(rideDto).subscribe(
-      (response: any) => {
+      (response: RideDto['rideId']) => {
         console.log(this.rideForm.value);
+        console.log(response);
+        this.router.navigate(['dashboard']);
+      },
+      (error) => {
+        console.error(error.message);
+      }
+    );
+  }
+
+  getRideP() {
+    this.service.getRideProvider('RPBH09').subscribe(
+      (response: RideProviderDto) => {
+        console.log(response);
         this.router.navigate(['dashboard']);
       },
       (error) => {

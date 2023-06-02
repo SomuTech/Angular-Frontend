@@ -31,8 +31,8 @@ export class RegistrationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(12),
+          Validators.min(100000000000),
+          Validators.max(999999999999),
         ],
       ],
       emailId: [
@@ -47,8 +47,8 @@ export class RegistrationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(12),
+          Validators.min(100000000000),
+          Validators.max(999999999999),
         ],
       ],
       firstName: [

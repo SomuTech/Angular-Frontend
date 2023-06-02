@@ -2,7 +2,13 @@ import { Time } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RideProviderDto, RideDto, TripDto, BillDto } from 'src/app/interfaces';
+import {
+  RideProviderDto,
+  RideDto,
+  TripDto,
+  BillDto,
+  TripBookingDto,
+} from 'src/app/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -29,23 +35,33 @@ export class RideProvidersDataService {
   }
 
   registerRide(rideDto: RideDto): Observable<RideDto['rideId']> {
-    const url = `${this.rideProviderUrl}/addbooking`;
-    return this.http.post<RideDto['rideId']>(url, rideDto);
+    console.log(
+      this.http.post<RideDto['rideId']>(
+        `${this.rideProviderUrl}/addbooking`,
+        rideDto
+      )
+    );
+    return this.http.post<RideDto['rideId']>(
+      `${this.rideProviderUrl}/addbooking`,
+      rideDto
+    );
   }
 
   updateRideProvider(
     rpId: RideProviderDto['rpId'] | null,
     data: RideProviderDto
   ): Observable<RideProviderDto['rpId']> {
-    const url = `${this.rideProviderUrl}/
-    ${rpId}/update`;
-    return this.http.put<RideProviderDto['rpId']>(url, data);
+    console.log(rpId);
+    return this.http.put<RideProviderDto['rpId']>(
+      `${this.rideProviderUrl}/${rpId}/update`,
+      data
+    );
   }
 
   getRideProvider(
     rpId: RideProviderDto['rpId'] | null
   ): Observable<RideProviderDto> {
-    const url = `${this.rideProviderUrl}get/${rpId}`;
+    const url = `${this.rideProviderUrl}/get/${rpId}`;
     return this.http.get<RideProviderDto>(url);
   }
 
@@ -73,6 +89,14 @@ export class RideProvidersDataService {
     return this.http.put<RideDto['rideId']>(
       `localhost:8081/api/rideProviders/bookings/${tripId}`,
       data
+    );
+  }
+
+  getBookingStatus(
+    rideId: TripBookingDto['tripId']
+  ): Observable<TripBookingDto[]> {
+    return this.http.get<TripBookingDto[]>(
+      `localhost:8081/api/rideProviders/bookingStatus/${rideId}`
     );
   }
 }

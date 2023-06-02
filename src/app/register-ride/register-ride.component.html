@@ -50,30 +50,35 @@
         <div class="form-group">
             <label>Ride Status *</label><br>
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="plannedStatus" value="Planned"
-                formControlName="rideStatus" required>
-              <label class="form-check-label" for="plannedStatus">Planned</label>
+                <input type="radio" class="form-check-input" id="plannedStatus"
+                    value="Planned"
+                    formControlName="rideStatus" required>
+                <label class="form-check-label" for="plannedStatus">Planned</label>
             </div>
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="startedStatus" value="Started"
-                formControlName="rideStatus" required>
-              <label class="form-check-label" for="startedStatus">Started</label>
+                <input type="radio" class="form-check-input" id="startedStatus"
+                    value="Started"
+                    formControlName="rideStatus" required>
+                <label class="form-check-label" for="startedStatus">Started</label>
             </div>
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="completedStatus" value="Completed"
-                formControlName="rideStatus" required>
-              <label class="form-check-label" for="completedStatus">Completed</label>
+                <input type="radio" class="form-check-input"
+                    id="completedStatus" value="Completed"
+                    formControlName="rideStatus" required>
+                <label class="form-check-label" for="completedStatus">Completed</label>
             </div>
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="canceledStatus" value="Canceled"
-                formControlName="rideStatus" required>
-              <label class="form-check-label" for="canceledStatus">Canceled</label>
+                <input type="radio" class="form-check-input" id="canceledStatus"
+                    value="Canceled"
+                    formControlName="rideStatus" required>
+                <label class="form-check-label" for="canceledStatus">Canceled</label>
             </div>
-            <div *ngIf="rideForm.get('rideStatus')?.invalid && rideForm.get('rideStatus')?.touched"
-              class="invalid-feedback">
-              Ride Status is required.
+            <div
+                *ngIf="rideForm.get('rideStatus')?.invalid && rideForm.get('rideStatus')?.touched"
+                class="invalid-feedback">
+                Ride Status is required.
             </div>
-          </div>
+        </div>
 
         <div class="form-group">
             <label for="seatsFilled">Seats Filled *</label>
@@ -122,4 +127,6 @@
         <button type="submit" [disabled]="rideForm.invalid"
             class="btn btn-primary">Save</button>
     </form>
+
+    <button (click)="getRideP()">Press</button>
 </div>

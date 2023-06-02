@@ -8,7 +8,6 @@ import { RideInfoDto, RideProviderDto } from '../interfaces';
   templateUrl: './updation.component.html',
   styleUrls: ['./updation.component.css'],
 })
-  
 export class UpdationComponent implements OnInit {
   rideProviderForm!: FormGroup;
   rideInfoForm!: FormGroup;
@@ -32,8 +31,8 @@ export class UpdationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(12),
-          Validators.maxLength(12),
+          Validators.min(100000000000),
+          Validators.max(999999999999),
         ],
       ],
 
@@ -49,8 +48,8 @@ export class UpdationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
+          Validators.min(1000000000),
+          Validators.max(9999999999),
         ],
       ],
       firstName: [
@@ -104,7 +103,7 @@ export class UpdationComponent implements OnInit {
       vehicleNo: ['', Validators.required],
       carType: ['', Validators.required],
       carName: ['', Validators.required],
-      fualType: ['', Validators.required],
+      fuelType: ['', Validators.required],
       noOfSeats: ['', [Validators.required, Validators.min(0)]],
     });
     this.rideInfos.push(rideInfoGroup);
@@ -118,6 +117,7 @@ export class UpdationComponent implements OnInit {
     const id = sessionStorage.getItem('rpId');
     this.service.getRideProvider(id).subscribe(
       (userData: RideProviderDto) => {
+        console.log(userData);
         if (userData) {
           this.rideProviderForm.patchValue({
             adharCard: userData.adharCard,
@@ -138,7 +138,7 @@ export class UpdationComponent implements OnInit {
               vehicleNo: [rideInfo.vehicleNo, Validators.required],
               carType: [rideInfo.carType, Validators.required],
               carName: [rideInfo.carName, Validators.required],
-              fualType: [rideInfo.fualType, Validators.required],
+              fuelType: [rideInfo.fualType, Validators.required],
               noOfSeats: [
                 rideInfo.noOfSeats,
                 [Validators.required, Validators.min(0)],
@@ -167,8 +167,8 @@ export class UpdationComponent implements OnInit {
     this.service
       .updateRideProvider(sessionStorage.getItem('rpId'), rideProviderDto)
       .subscribe(
-        (response: any) => {
-          sessionStorage.setItem('rpId', response.rpId);
+        (response: RideProviderDto['rpId']) => {
+          sessionStorage.setItem('rpId', response);
           this.updationStatus = true;
         },
         (error: any) => {
@@ -189,5 +189,3 @@ export class UpdationComponent implements OnInit {
     );
   }
 }
-
-
