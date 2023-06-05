@@ -54,7 +54,7 @@ export interface BillDto {
 export interface TripBookingDto {
   tripId: string;
   rideDate: Date;
-  rideTime: string; // Assuming you want to store the time as a string
+  rideTime: string;
   rideStatus: string;
   seatsFilled: number;
   fromLoc: string;

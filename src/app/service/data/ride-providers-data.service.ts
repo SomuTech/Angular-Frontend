@@ -29,18 +29,11 @@ export class RideProvidersDataService {
   }
 
   getBilling(): Observable<BillDto[]> {
-    return this.http.get<BillDto[]>(
-      'localhost:8081/api/rideProviders/billing?rpId=RPAM01&month=3'
-    );
+    const url = `${this.rideProviderUrl}/billing?rpId=RPAM01&month=3`;
+    return this.http.get<BillDto[]>(url);
   }
 
   registerRide(rideDto: RideDto): Observable<RideDto['rideId']> {
-    console.log(
-      this.http.post<RideDto['rideId']>(
-        `${this.rideProviderUrl}/addbooking`,
-        rideDto
-      )
-    );
     return this.http.post<RideDto['rideId']>(
       `${this.rideProviderUrl}/addbooking`,
       rideDto
@@ -82,21 +75,14 @@ export class RideProvidersDataService {
     return this.http.get<RideProviderDto>(url);
   }
 
-  updateRides(
-    tripId: RideDto['rideId'] | null,
-    data: RideDto
-  ): Observable<RideDto['rideId']> {
-    return this.http.put<RideDto['rideId']>(
-      `localhost:8081/api/rideProviders/bookings/${tripId}`,
-      data
-    );
+  updateRides(tripId: any, data: RideDto): Observable<RideDto['rideId']> {
+    const url = `${this.rideProviderUrl}/bookings/${tripId}`;
+    return this.http.put<RideDto['rideId']>(url, data);
   }
 
-  getBookingStatus(
-    rideId: TripBookingDto['tripId']
-  ): Observable<TripBookingDto[]> {
-    return this.http.get<TripBookingDto[]>(
-      `localhost:8081/api/rideProviders/bookingStatus/${rideId}`
-    );
+  getBookingStatus(rideId: any): Observable<TripBookingDto[]> {
+    console.log('gbdhdfg');
+    const url = `${this.rideProviderUrl}/bookingStatus/${rideId}`;
+    return this.http.get<TripBookingDto[]>(url);
   }
 }

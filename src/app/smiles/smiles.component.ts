@@ -11,6 +11,7 @@ import { TripDto } from '../interfaces';
 export class SmilesComponent implements OnInit {
   generateSmilesForm!: FormGroup;
   smilesReport: TripDto[] = [];
+  status: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class SmilesComponent implements OnInit {
       .subscribe(
         (response: TripDto[]) => {
           this.smilesReport = response;
+          this.status = true;
         },
         (error) => {
           console.log(error.message);

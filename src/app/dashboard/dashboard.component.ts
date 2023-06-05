@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
 import { TripBookingDto } from '../interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,37 +9,34 @@ import { TripBookingDto } from '../interfaces';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  rideBookings: any[] = []; // Array to store ride booking information
-  tripBills: any[] = []; // Array to store trip bill details per person
-  showTripBill = false; // Flag to control visibility of trip bill section
+  rideBookings: TripBookingDto[] = [];
+  tripBills: any[] = [];
+  showTrips = false;
+  tripStarted: boolean = false;
 
-  constructor(private service: RideProvidersDataService) {}
+  constructor(
+    private router: Router,
+    private service: RideProvidersDataService
+  ) {}
 
   ngOnInit(): void {}
 
   startTrip(): void {
-    // Implement start trip logic here
-    console.log('Trip started');
+    this.tripStarted = true;
   }
 
   endTrip(): void {
-    // Implement end trip logic here
-
-    // Display trip bill per person
-    this.showTripBill = true;
-
-    // Populate trip bill details (replace with actual data)
-    this.tripBills = [
-      { seekerName: 'Rider 1', amount: 50 },
-      { seekerName: 'Rider 2', amount: 40 },
-      { seekerName: 'Rider 3', amount: 30 },
-    ];
+    if (this.tripStarted === true) {
+      this.tripStarted = false;
+      this.router.navigate(['/bill']);
+    }
   }
 
   getBookingStatus() {
     this.service.getBookingStatus('Ride01').subscribe(
       (response: TripBookingDto[]) => {
-        console.log(response);
+        this.rideBookings = response;
+        this.showTrips = true;
       },
       (error) => {
         console.log(error.message);

@@ -63,7 +63,7 @@
                   <div *ngIf="rideProviderForm.get('phone')?.errors?.['min']"
                     class="text-danger">Phone
                     number
-                    should be 12 digits long.</div>
+                    should be 10 digits long.</div>
                   <div *ngIf="rideProviderForm.get('phone')?.errors?.['max']"
                     class="text-danger">Phone
                     number
@@ -262,8 +262,10 @@
               </form>
             </form>
           </div>
-          <div *ngIf="registrationStatus" class="text-center mt-4">
-            <h3>{{ registrationStatus }}</h3>
+          <div *ngIf="registrationStatus"
+            class="text-center mt-4 h4 bg-success p-1">
+            <p>Your Registration is successfull with Ride Provider Id:
+              {{registrationId}}</p>
           </div>
         </div>
       </div>

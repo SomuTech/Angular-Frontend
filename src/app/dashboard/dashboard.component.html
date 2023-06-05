@@ -1,52 +1,44 @@
 <div class="container">
-  <h2>Driver Dashboard</h2>
+  <h2 class="text-center">Driver Dashboard</h2>
 
-  <button (click)="getBookingStatus()">Booking Status</button>
-  <!-- Display ride booking information -->
-  <h3>Ride Booking Information:</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Ride Seeker</th>
-        <th>Booking Time</th>
-        <!-- Add more table headers as needed -->
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Iterate over ride booking information and display in table rows -->
-      <tr *ngFor="let booking of rideBookings">
-        <td>{{ booking.seekerName }}</td>
-        <td>{{ booking.bookingTime }}</td>
-        <!-- Add more table cells as needed -->
-      </tr>
-    </tbody>
-  </table>
-  <!-- Display start/end trip buttons -->
-  <div>
-    <button (click)="startTrip()">Start Trip</button>
-    <button (click)="endTrip()">End Trip</button>
+  <button class="btn btn-primary" (click)="getBookingStatus()">Booking
+    Information</button>
+
+  <div class="text-center">
+    <button class="btn btn-primary" (click)="startTrip()">Start Trip</button>
+    <button class="btn btn-primary" (click)="endTrip()">End Trip</button>
   </div>
-  <!-- Display trip bill per person upon ending the trip -->
-  <div *ngIf="showTripBill">
-    <h3>Trip Bill Per Person:</h3>
-    <!-- Display trip bill details per person -->
-    <!-- Replace the table structure and data with your actual trip bill details -->
+
+  <div *ngIf="showTrips">
     <table class="table">
       <thead>
         <tr>
-          <th>Ride Seeker</th>
-          <th>Amount</th>
-          <!-- Add more table headers as needed -->
+          <th>Trip ID</th>
+          <th>Ride Date</th>
+          <th>Ride Time</th>
+          <th>Ride Status</th>
+          <th>Seats Filled</th>
+          <th>From Location</th>
+          <th>To Location</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Iterate over trip bill details and display in table rows -->
-        <tr *ngFor="let trip of tripBills">
-          <td>{{ trip.seekerName }}</td>
-          <td>{{ trip.amount }}</td>
-          <!-- Add more table cells as needed -->
+        <tr *ngFor="let trip of rideBookings">
+          <td>{{ trip.tripId }}</td>
+          <td>{{ trip.rideDate | date }}</td>
+          <td>{{ trip.rideTime }}</td>
+          <td>{{ trip.rideStatus }}</td>
+          <td>{{ trip.seatsFilled }}</td>
+          <td>{{ trip.fromLoc }}</td>
+          <td>{{ trip.toLoc }}</td>
         </tr>
       </tbody>
     </table>
+
   </div>
+
+  <div *ngIf="tripStarted" class="bg-success p-1 text-center text-light">
+    <p>Trip Started</p>
+  </div>
+
 </div>

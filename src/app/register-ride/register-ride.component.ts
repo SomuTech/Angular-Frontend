@@ -59,23 +59,12 @@ export class RegisterRideComponent implements OnInit {
     };
     this.service.registerRide(rideDto).subscribe(
       (response: RideDto['rideId']) => {
-        console.log(this.rideForm.value);
         console.log(response);
         this.router.navigate(['dashboard']);
       },
       (error) => {
-        console.error(error.message);
-      }
-    );
-  }
-
-  getRideP() {
-    this.service.getRideProvider('RPBH09').subscribe(
-      (response: RideProviderDto) => {
-        console.log(response);
         this.router.navigate(['dashboard']);
-      },
-      (error) => {
+        console.log("dfghjk");
         console.error(error.message);
       }
     );

@@ -1,9 +1,11 @@
 <div class="container">
-    <h2>Generate Smiles</h2>
-    <form [formGroup]="generateSmilesForm" (ngSubmit)="onSubmit()">
+    <h2 class="text-center">Generate Smiles</h2>
+    <form [formGroup]="generateSmilesForm" (ngSubmit)="onSubmit()"
+        class="text-center">
         <div class="form-group">
             <label for="month">Month:</label>
-            <select id="month" formControlName="month" required>
+            <select id="month" formControlName="month" required
+                class="form-control">
                 <option value disabled selected>Select a month</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -18,20 +20,20 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
-            <div
+            <div class="invalid-feedback"
                 *ngIf="generateSmilesForm.get('month')?.invalid && (generateSmilesForm.get('month')?.dirty || generateSmilesForm.get('month')?.touched)">
                 <div
                     *ngIf="generateSmilesForm.get('month')?.errors?.['required']">Month
                     is required.</div>
             </div>
         </div>
-        <button type="submit" [disabled]="generateSmilesForm.invalid">Generate
-            Report</button>
+        <button type="submit" [disabled]="generateSmilesForm.invalid"
+            class="btn btn-primary">Generate Smiles</button>
     </form>
 
-    <div>
+    <div *ngIf="status" class="mt-4 text-center">
         <h3>Smiles Report</h3>
-        <table class="table">
+        <table class="table mx-auto">
             <thead>
                 <tr>
                     <th>Ride Provider</th>

@@ -47,8 +47,8 @@ export class RegistrationComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.min(100000000000),
-          Validators.max(999999999999),
+          Validators.min(1000000000),
+          Validators.max(9999999999),
         ],
       ],
       firstName: [

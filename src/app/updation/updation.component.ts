@@ -13,6 +13,7 @@ export class UpdationComponent implements OnInit {
   rideInfoForm!: FormGroup;
 
   updationStatus: boolean = false;
+  acknowledgement: RideProviderDto['rpId'] = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -178,10 +179,10 @@ export class UpdationComponent implements OnInit {
   }
 
   deleteRideProvider() {
-    console.log('ssff');
     this.service.deleteRideProvider(sessionStorage.getItem('rpId')).subscribe(
       (response: any) => {
         this.updationStatus = true;
+        this.acknowledgement = response;
       },
       (error) => {
         console.error(error);
