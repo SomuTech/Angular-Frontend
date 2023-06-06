@@ -7,7 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  isSessionKeyPresent: boolean = false;
+  constructor(private router: Router) {
+    this.isSessionKeyPresent = !!sessionStorage.getItem('rpId');
+  }
 
   navigateToRegistration() {
     this.router.navigate(['/register']);

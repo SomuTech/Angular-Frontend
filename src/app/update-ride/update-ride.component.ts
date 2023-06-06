@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
+import { Router } from '@angular/router';
+import { RideDto } from '../interfaces';
 
 @Component({
   selector: 'app-update-ride',
@@ -9,22 +11,22 @@ import { RideProvidersDataService } from '../service/data/ride-providers-data.se
 })
 export class UpdateRideComponent implements OnInit {
   rideForm!: FormGroup;
-
-  updationStatus: boolean = false;
+  status: boolean = false;
+  statusResponse: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private service: RideProvidersDataService
   ) {}
 
   ngOnInit(): void {
     this.buildForm();
-    // this.fetchUserData();
   }
 
   buildForm(): void {
     this.rideForm = this.formBuilder.group({
-      createrUserId: ['', Validators.required],
+      rideId: ['', Validators.required],
       fromLoc: ['', Validators.required],
       rideDate: ['', Validators.required],
       rideStatus: ['', Validators.required],
@@ -36,42 +38,35 @@ export class UpdateRideComponent implements OnInit {
     });
   }
 
-  // fetchUserData() {
-  //   const id = sessionStorage.getItem('rpId');
-  //   this.service.updateRides.subscribe(
-  //     (data)=>{this.rideForm.patchValue({
-  //       createrUserId: data.createrUserId,
-  //       vehicleId: data.vehicleId,
-  //       rideDate: data.rideDate,
-  //       rideTime: data.rideTime,
-  //       rideStatus: data.rideStatus,
-  //       seatsFilled: data.seatsFilled,
-  //       fromLoc: data.fromLoc,
-  //       toLoc: data.toLoc,
-  //       numberOfSeats: data.numberOfSeats}
-  //     );
-  //     (error) => {
-  //       console.error('Failed to fetch data from the backend.');
-  //     }
-  //   );
-  // }
-
   onSubmit(): void {
     if (this.rideForm.invalid) {
       console.log('Invalid details');
       return;
     }
-
-    // Update the ride information
-    // Replace this with your actual update logic or API call
-    this.updateRide();
-
-    // Display an acknowledgement upon successful update
-    console.log('Ride information updated successfully');
+    this.saveRide();
   }
 
-  updateRide(): void {
-    // Implement your update logic here
-    console.log('Ride information updated:', this.rideForm.value);
+  saveRide(): void {
+    const rideDto: RideDto = {
+      rideId: this.rideForm.get('rideId')!.value,
+      createrUserId: '',
+      fromLoc: this.rideForm.get('fromLoc')!.value,
+      rideDate: this.rideForm.get('rideDate')!.value,
+      rideStatus: this.rideForm.get('rideStatus')!.value,
+      rideTime: this.rideForm.get('rideTime')!.value,
+      seatsFilled: this.rideForm.get('seatsFilled')!.value,
+      toLoc: this.rideForm.get('toLoc')!.value,
+      vehicleId: this.rideForm.get('vehicleId')!.value,
+      numberOfSeats: this.rideForm.get('numberOfSeats')!.value,
+    };
+    this.service.updateRides(rideDto['rideId'], rideDto).subscribe(
+      (response: RideDto['rideId']) => {
+        this.status = true;
+        this.router.navigate(['dashboard']);
+      },
+      (error) => {
+        this.statusResponse = error.error.message;
+      }
+    );
   }
 }

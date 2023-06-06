@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
 import { BillDto } from '../interfaces';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-billing',
@@ -11,24 +11,59 @@ import { FormBuilder } from '@angular/forms';
 export class BillingComponent {
   selectedMonth: string = '';
   billings: BillDto[] = [];
+  tripBill!: BillDto;
+  showBill: boolean = false;
+  showTrips: boolean = false;
+  tripStarted: boolean = false;
+  generateBillForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: RideProvidersDataService
-  ) {}
+  ) {
+    this.buildForm();
+  }
 
   onMonthSelected(month: string): void {
     this.selectedMonth = month;
   }
 
-  generateReport(): void {
-    this.service.getBilling().subscribe(
-      (response: BillDto[]) => {
-        this.billings = response;
-        console.log(response);
+  buildForm(): void {
+    this.generateBillForm = this.formBuilder.group({
+      month: ['', Validators.required],
+    });
+  }
+
+  generateBill() {
+    this.service.generateBill('RPAM01').subscribe(
+      (response: BillDto) => {
+        this.tripBill = response;
+        this.showTrips = false;
+        this.showBill = true;
       },
       (error) => {
-        console.log('Error occurred while fetching bills:', error);
+        console.log(error.message);
+      }
+    );
+  }
+
+  generateReport() {
+    this.showTrips = true;
+    this.showBill = false;
+  }
+
+  onSubmit(): void {
+    this.service.getBilling().subscribe(
+      (response: BillDto[]) => {
+        this.showTrips = true;
+        this.billings = response;
+        this.showBill = false;
+      },
+      (error) => {
+        console.log(
+          'Error occurred while fetching bills:',
+          error.error.message
+        );
       }
     );
   }

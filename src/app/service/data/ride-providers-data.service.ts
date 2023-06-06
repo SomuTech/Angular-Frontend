@@ -33,7 +33,18 @@ export class RideProvidersDataService {
     return this.http.get<BillDto[]>(url);
   }
 
+  generateBill(rideId: any): Observable<BillDto> {
+    const url = `${this.rideProviderUrl}/generatebill?rideId=${rideId}`;
+    return this.http.get<BillDto>(url);
+  }
+
   registerRide(rideDto: RideDto): Observable<RideDto['rideId']> {
+    console.log(
+      this.http.post<RideDto['rideId']>(
+        `${this.rideProviderUrl}/addbooking`,
+        rideDto
+      )
+    );
     return this.http.post<RideDto['rideId']>(
       `${this.rideProviderUrl}/addbooking`,
       rideDto

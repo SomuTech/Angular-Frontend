@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RideProvidersDataService } from '../service/data/ride-providers-data.service';
-import { TripBookingDto } from '../interfaces';
+import { BillDto, RideDto, TripBookingDto } from '../interfaces';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   rideBookings: TripBookingDto[] = [];
-  tripBills: any[] = [];
+  tripBill!: BillDto;
   showTrips = false;
   tripStarted: boolean = false;
 
@@ -30,6 +30,18 @@ export class DashboardComponent implements OnInit {
       this.tripStarted = false;
       this.router.navigate(['/bill']);
     }
+  }
+
+  generateBill(){
+    this.service.generateBill('RPAM01').subscribe(
+      (response: BillDto) => {
+        this.tripBill = response;
+        this.showTrips = true;
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
   }
 
   getBookingStatus() {

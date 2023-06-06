@@ -11,6 +11,8 @@ import { RideDto, RideProviderDto } from '../interfaces';
 })
 export class RegisterRideComponent implements OnInit {
   rideForm!: FormGroup;
+  status: boolean = false;
+  statusResponse: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,13 +61,11 @@ export class RegisterRideComponent implements OnInit {
     };
     this.service.registerRide(rideDto).subscribe(
       (response: RideDto['rideId']) => {
-        console.log(response);
+        this.status = true;
         this.router.navigate(['dashboard']);
       },
       (error) => {
-        this.router.navigate(['dashboard']);
-        console.log("dfghjk");
-        console.error(error.message);
+        this.statusResponse = error.error.message;
       }
     );
   }
