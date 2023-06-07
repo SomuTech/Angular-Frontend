@@ -12,8 +12,9 @@ export class RegistrationComponent implements OnInit {
   rideProviderForm!: FormGroup;
   rideInfoForm!: FormGroup;
 
-  registrationStatus: boolean = false;
+  registrationStatus!: boolean;
   registrationId: string = '';
+  errorResponse: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -132,7 +133,8 @@ export class RegistrationComponent implements OnInit {
         this.registrationId = response.rpId;
       },
       (error: any) => {
-        console.error(error.message);
+        this.registrationStatus = false;
+        this.errorResponse = error.error.message;
       }
     );
   }
