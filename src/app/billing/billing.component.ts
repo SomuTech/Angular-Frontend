@@ -35,7 +35,7 @@ export class BillingComponent {
   }
 
   generateBill() {
-    this.service.generateBill('RPAM01').subscribe(
+    this.service.generateBill(sessionStorage.getItem('rpId')).subscribe(
       (response: BillDto) => {
         this.tripBill = response;
         this.showTrips = false;
@@ -53,7 +53,7 @@ export class BillingComponent {
   }
 
   onSubmit(): void {
-    this.service.getBilling().subscribe(
+    this.service.getBilling(sessionStorage.getItem('rpId'), this.generateBillForm.value.month).subscribe(
       (response: BillDto[]) => {
         this.showTrips = true;
         this.billings = response;

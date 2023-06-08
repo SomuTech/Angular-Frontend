@@ -13,6 +13,7 @@ import { RegisterRideComponent } from './register-ride/register-ride.component';
 import { UpdateRideComponent } from './update-ride/update-ride.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BillingComponent } from './billing/billing.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BillingComponent } from './billing/billing.component';
     RegisterRideComponent,
     UpdateRideComponent,
     DashboardComponent,
-    BillingComponent
+    BillingComponent,
+    ErrorComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],

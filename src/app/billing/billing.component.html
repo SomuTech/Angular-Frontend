@@ -9,27 +9,38 @@
 <div *ngIf="showBill" class="container">
     <div class="mt-4">
         <h3>Bill</h3>
-        <table class="table">
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
                 <tr>
-                    <th>Bill Id</th>
-                    <th>Bill Amount</th>
-                    <th>Ride Date</th>
-                    <th>Source</th>
-                    <th>Destination</th>
+                    <th>Bill Details</th>
+                    <th>Values</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <td class="fw-bold">Bill Id</td>
                     <td>{{ tripBill.billId }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Bill Amount</td>
                     <td>{{ tripBill.bill }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Ride Date</td>
                     <td>{{ tripBill.billDate }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Source</td>
                     <td>{{ tripBill.source }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Destination</td>
                     <td>{{ tripBill.destination }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
+     
 </div>
 
 <div *ngIf="showTrips" class="container">
@@ -86,5 +97,4 @@
             </tbody>
         </table>
     </div>
-
 </div>

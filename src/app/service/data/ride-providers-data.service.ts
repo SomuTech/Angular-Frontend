@@ -2,13 +2,8 @@ import { Time } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  RideProviderDto,
-  RideDto,
-  TripDto,
-  BillDto,
-  TripBookingDto,
-} from 'src/app/interfaces';
+import { RideProviderDto, RideDto, TripDto, BillDto, TripBookingDto,} 
+from 'src/app/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +18,8 @@ export class RideProvidersDataService {
     return this.http.post<RideProviderDto>(`${this.rideProviderUrl}/new`, data);
   }
 
-  getBilling(): Observable<BillDto[]> {
-    const url = `${this.rideProviderUrl}/billing?rpId=RPAM01&month=3`;
+  getBilling(rpId: any, month: any): Observable<BillDto[]> {
+    const url = `${this.rideProviderUrl}/billing?rpId=${rpId}&month=${month}`;
     return this.http.get<BillDto[]>(url);
   }
 
@@ -34,32 +29,16 @@ export class RideProvidersDataService {
   }
 
   registerRide(rideDto: RideDto): Observable<RideDto['rideId']> {
-    console.log(
-      this.http.post<RideDto['rideId']>(
-        `${this.rideProviderUrl}/addbooking`,
-        rideDto
-      )
-    );
-    return this.http.post<RideDto['rideId']>(
-      `${this.rideProviderUrl}/addbooking`,
-      rideDto
-    );
+    return this.http.post<RideDto['rideId']>(`${this.rideProviderUrl}/addbooking`,rideDto);
   }
 
   updateRideProvider(
-    rpId: RideProviderDto['rpId'] | null,
-    data: RideProviderDto
-  ): Observable<RideProviderDto> {
-    console.log(rpId);
-    return this.http.put<RideProviderDto>(
-      `${this.rideProviderUrl}/${rpId}/update`,
-      data
-    );
+    rpId: RideProviderDto['rpId'] | null,data: RideProviderDto): Observable<RideProviderDto> {
+    return this.http.put<RideProviderDto>(`${this.rideProviderUrl}/${rpId}/update`,data);
   }
 
   getRideProvider(
-    rpId: RideProviderDto['rpId'] | null
-  ): Observable<RideProviderDto> {
+    rpId: RideProviderDto['rpId'] | null): Observable<RideProviderDto> {
     const url = `${this.rideProviderUrl}/get/${rpId}`;
     return this.http.get<RideProviderDto>(url);
   }
@@ -87,7 +66,6 @@ export class RideProvidersDataService {
   }
 
   getBookingStatus(rideId: any): Observable<TripBookingDto[]> {
-    console.log('gbdhdfg');
     const url = `${this.rideProviderUrl}/bookingStatus/${rideId}`;
     return this.http.get<TripBookingDto[]>(url);
   }
