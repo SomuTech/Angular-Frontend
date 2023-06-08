@@ -127,14 +127,16 @@ export class RegistrationComponent implements OnInit {
     };
 
     this.service.registerRideProvider(rideProviderDto).subscribe(
-      (response: any) => {
+      (response: RideProviderDto) => {
+        console.log('Success:', response);
         sessionStorage.setItem('rpId', response.rpId);
         this.registrationStatus = true;
         this.registrationId = response.rpId;
       },
       (error: any) => {
+        console.log('Error:', error);
         this.registrationStatus = false;
-        this.errorResponse = error.error.message;
+        this.errorResponse = error?.error?.message || 'An error occurred';
       }
     );
   }

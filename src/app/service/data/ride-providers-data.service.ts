@@ -19,13 +19,8 @@ export class RideProvidersDataService {
   private rideProviderUrl = 'http://localhost:8081/api/rideProviders';
   private smilesUrl = 'http://localhost:8081/api/smiles';
 
-  registerRideProvider(
-    data: RideProviderDto
-  ): Observable<RideProviderDto['rpId']> {
-    return this.http.post<RideProviderDto['rpId']>(
-      `${this.rideProviderUrl}/new`,
-      data
-    );
+  registerRideProvider(data: RideProviderDto): Observable<RideProviderDto> {
+    return this.http.post<RideProviderDto>(`${this.rideProviderUrl}/new`, data);
   }
 
   getBilling(): Observable<BillDto[]> {
@@ -54,9 +49,9 @@ export class RideProvidersDataService {
   updateRideProvider(
     rpId: RideProviderDto['rpId'] | null,
     data: RideProviderDto
-  ): Observable<RideProviderDto['rpId']> {
+  ): Observable<RideProviderDto> {
     console.log(rpId);
-    return this.http.put<RideProviderDto['rpId']>(
+    return this.http.put<RideProviderDto>(
       `${this.rideProviderUrl}/${rpId}/update`,
       data
     );

@@ -12,8 +12,9 @@ export class UpdationComponent implements OnInit {
   rideProviderForm!: FormGroup;
   rideInfoForm!: FormGroup;
 
-  updationStatus: boolean = false;
+  updationStatus!: boolean;
   acknowledgement: RideProviderDto['rpId'] = '';
+  errorResponse: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -104,7 +105,7 @@ export class UpdationComponent implements OnInit {
       vehicleNo: ['', Validators.required],
       carType: ['', Validators.required],
       carName: ['', Validators.required],
-      fuelType: ['', Validators.required],
+      fualType: ['', Validators.required],
       noOfSeats: ['', [Validators.required, Validators.min(0)]],
     });
     this.rideInfos.push(rideInfoGroup);
@@ -118,7 +119,6 @@ export class UpdationComponent implements OnInit {
     const id = sessionStorage.getItem('rpId');
     this.service.getRideProvider(id).subscribe(
       (userData: RideProviderDto) => {
-        console.log(userData);
         if (userData) {
           this.rideProviderForm.patchValue({
             adharCard: userData.adharCard,
@@ -139,7 +139,7 @@ export class UpdationComponent implements OnInit {
               vehicleNo: [rideInfo.vehicleNo, Validators.required],
               carType: [rideInfo.carType, Validators.required],
               carName: [rideInfo.carName, Validators.required],
-              fuelType: [rideInfo.fualType, Validators.required],
+              fualType: [rideInfo.fualType, Validators.required],
               noOfSeats: [
                 rideInfo.noOfSeats,
                 [Validators.required, Validators.min(0)],
@@ -151,29 +151,30 @@ export class UpdationComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching user data:', error);
+        this.errorResponse = error.error.message;
       }
     );
   }
 
-  saveUserData() {
+  saveUserData(): void {
     if (this.rideProviderForm.invalid || this.rideInfoForm.invalid) {
       console.log('invalid details');
       return;
     }
     const rideProviderDto: RideProviderDto = {
       ...this.rideProviderForm.value,
-      rideInfoDetails: this.rideInfoForm.value,
+      rideInfos: this.rideInfoForm.value.rideInfos,
     };
 
     this.service
       .updateRideProvider(sessionStorage.getItem('rpId'), rideProviderDto)
       .subscribe(
-        (response: RideProviderDto['rpId']) => {
-          sessionStorage.setItem('rpId', response);
+        (response: RideProviderDto) => {
+          sessionStorage.setItem('rpId', response.rpId);
           this.updationStatus = true;
         },
         (error: any) => {
-          console.error(error.message);
+          console.error(error.error.message);
         }
       );
   }
@@ -185,6 +186,7 @@ export class UpdationComponent implements OnInit {
         this.acknowledgement = response;
       },
       (error) => {
+        this.errorResponse = error.error.message;
         console.error(error);
       }
     );

@@ -244,11 +244,11 @@
                                         </div>
 
                                         <div>
-                                            <label for="fuelType">Fuel Type:</label>
-                                            <input type="text" id="fuelType"
-                                                formControlName="fuelType">
+                                            <label for="fualType">Fuel Type:</label>
+                                            <input type="text" id="fualType"
+                                                formControlName="fualType">
                                             <div
-                                                *ngIf="rideInfoForm.get('fuelType')?.invalid && rideInfoForm.get('fuelType')?.touched"
+                                                *ngIf="rideInfoForm.get('fualType')?.invalid && rideInfoForm.get('fualType')?.touched"
                                                 class="text-danger">
                                                 Fuel Type is required.
                                             </div>
@@ -291,7 +291,10 @@
                         <h3>Acknowledgement:</h3>
                         <p>Details updated successfully</p>
                     </div>
-
+                </div>
+                <div *ngIf="!updationStatus"
+                    class="text-center mt-4 h4 p-1">
+                    <p>{{errorResponse}}</p>
                 </div>
             </div>
         </div>
