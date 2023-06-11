@@ -1,0 +1,15 @@
+footer {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 20px; /* Add this to create some space between the content and footer */
+  padding-bottom: 20px; /* Add this to create some space between the content and footer */
+}
+
+footer ul {
+  margin: 0; /* Add this to reset the margin */
+  padding: 0; /* Add this to reset the padding */
+}
+
+footer ul li {
+  list-style: none;
+}

@@ -185,70 +185,76 @@
               </div>
               <form [formGroup]="rideInfoForm" (ngSubmit)="onSubmit()">
                 <div formArrayName="rideInfos">
-                  <div
+                  <div class="card"
                     *ngFor="let rideInfoGroup of rideInfos.controls; let i = index"
                     [formGroupName]="i">
-                    <div class="h6 text-center bg-secondary"
-                      [ngClass]="{ 'disabled': rideProviderForm.invalid }">
-                      <p>Ride Info {{ i + 1 }}</p>
-                    </div>
-                    <div>
-                      <label for="vehicleNo">Vehicle Number:</label>
-                      <input type="text" id="vehicleNo"
-                        formControlName="vehicleNo">
-                      <div
-                        *ngIf="rideInfoForm.get('vehicleNo')?.invalid && rideInfoForm.get('vehicleNo')?.touched"
-                        class="text-danger">
-                        Vehicle Number is required.
+                    <div class="card-body">
+                      <div class="h4 p-1"
+                        [ngClass]="{ 'disabled': rideProviderForm.invalid }">
+                        <p>Ride Info {{ i + 1 }}</p>
                       </div>
-                    </div>
-
-                    <div>
-                      <label for="carType">Car Type:</label>
-                      <input type="text" id="carType" formControlName="carType">
-                      <div
-                        *ngIf="rideInfoForm.get('carType')?.invalid && rideInfoForm.get('carType')?.touched"
-                        class="text-danger">
-                        Car Type is required.
+                      <div>
+                        <label for="vehicleNo">Vehicle Number:</label>
+                        <input type="text" id="vehicleNo"
+                          formControlName="vehicleNo">
+                        <div
+                          *ngIf="rideInfoForm.get('vehicleNo')?.invalid && rideInfoForm.get('vehicleNo')?.touched"
+                          class="text-danger">
+                          Vehicle Number is required.
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <label for="carName">Car Name:</label>
-                      <input type="text" id="carName" formControlName="carName">
-                      <div
-                        *ngIf="rideInfoForm.get('carName')?.invalid && rideInfoForm.get('carName')?.touched"
-                        class="text-danger">
-                        Car Name is required.
+                      <div>
+                        <label for="carType">Car Type:</label>
+                        <input type="text" id="carType"
+                          formControlName="carType">
+                        <div
+                          *ngIf="rideInfoForm.get('carType')?.invalid && rideInfoForm.get('carType')?.touched"
+                          class="text-danger">
+                          Car Type is required.
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <label for="fualType">Fuel Type:</label>
-                      <input type="text" id="fualType"
-                        formControlName="fualType">
-                      <div
-                        *ngIf="rideInfoForm.get('fualType')?.invalid && rideInfoForm.get('fualType')?.touched"
-                        class="text-danger">
-                        Fuel Type is required.
+                      <div>
+                        <label for="carName">Car Name:</label>
+                        <input type="text" id="carName"
+                          formControlName="carName">
+                        <div
+                          *ngIf="rideInfoForm.get('carName')?.invalid && rideInfoForm.get('carName')?.touched"
+                          class="text-danger">
+                          Car Name is required.
+                        </div>
                       </div>
-                    </div>
 
-                    <div>
-                      <label for="noOfSeats">Number of Seats:</label>
-                      <input type="number" id="noOfSeats"
-                        formControlName="noOfSeats">
-                      <div
-                        *ngIf="rideInfoForm.get('noOfSeats')?.invalid && rideInfoForm.get('noOfSeats')?.touched"
-                        class="text-danger">
-                        Number of Seats is required and should be non-negative.
+                      <div>
+                        <label for="fualType">Fuel Type:</label>
+                        <input type="text" id="fualType"
+                          formControlName="fualType">
+                        <div
+                          *ngIf="rideInfoForm.get('fualType')?.invalid && rideInfoForm.get('fualType')?.touched"
+                          class="text-danger">
+                          Fuel Type is required.
+                        </div>
                       </div>
-                    </div>
 
-                    <button type="button" class="btn btn-danger"
-                      (click)="removeRideInfo(i)">Remove</button>
+                      <div>
+                        <label for="noOfSeats">Number of Seats:</label>
+                        <input type="number" id="noOfSeats"
+                          formControlName="noOfSeats">
+                        <div
+                          *ngIf="rideInfoForm.get('noOfSeats')?.invalid && rideInfoForm.get('noOfSeats')?.touched"
+                          class="text-danger">
+                          Number of Seats is required and should be
+                          non-negative.
+                        </div>
+                      </div>
+
+                      <button type="button" class="btn btn-danger"
+                        (click)="removeRideInfo(i)">Remove</button>
+                    </div>
                   </div>
                 </div>
+                <br>
 
                 <div class="d-flex justify-content-between">
                   <button type="button" class="btn btn-primary"

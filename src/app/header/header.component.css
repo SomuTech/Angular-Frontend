@@ -2,4 +2,5 @@
     color: rgb(155, 154, 154);
     cursor: not-allowed;
     pointer-events: none;
+    display: none;
   }

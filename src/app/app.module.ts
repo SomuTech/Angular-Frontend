@@ -14,6 +14,7 @@ import { UpdateRideComponent } from './update-ride/update-ride.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BillingComponent } from './billing/billing.component';
 import { ErrorComponent } from './error/error.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ErrorComponent } from './error/error.component';
     UpdateRideComponent,
     DashboardComponent,
     BillingComponent,
-    ErrorComponent
+    ErrorComponent,
+    HomeComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
   providers: [],

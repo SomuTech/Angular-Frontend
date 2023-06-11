@@ -11,7 +11,7 @@ import { RideDto, RideProviderDto } from '../interfaces';
 })
 export class RegisterRideComponent implements OnInit {
   rideForm!: FormGroup;
-  status: boolean = false;
+  status!: boolean;
   statusResponse: string = '';
 
   constructor(
@@ -65,6 +65,7 @@ export class RegisterRideComponent implements OnInit {
         this.router.navigate(['dashboard']);
       },
       (error) => {
+        this.status = false;
         this.statusResponse = error.error.message;
       }
     );

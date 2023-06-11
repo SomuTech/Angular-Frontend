@@ -9,7 +9,7 @@
 <div *ngIf="showBill" class="container">
     <div class="mt-4">
         <h3>Bill</h3>
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th>Bill Details</th>
@@ -40,7 +40,7 @@
             </tbody>
         </table>
     </div>
-     
+
 </div>
 
 <div *ngIf="showTrips" class="container">
@@ -76,8 +76,8 @@
     </form>
     <div>
         <h3>Billing Information:</h3>
-        <table class="table">
-            <thead>
+        <table class="table table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th>Bill Id</th>
                     <th>Bill Amount</th>
