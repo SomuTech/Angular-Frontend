@@ -49,6 +49,7 @@ export class UpdateRideComponent implements OnInit {
   saveRide(): void {
     const rideDto: RideDto = {
       rideId: this.rideForm.get('rideId')!.value,
+      tripId: '',
       createrUserId: '',
       fromLoc: this.rideForm.get('fromLoc')!.value,
       rideDate: this.rideForm.get('rideDate')!.value,
@@ -60,7 +61,7 @@ export class UpdateRideComponent implements OnInit {
       numberOfSeats: this.rideForm.get('numberOfSeats')!.value,
     };
     this.service.updateRides(rideDto['rideId'], rideDto).subscribe(
-      (response: RideDto['rideId']) => {
+      (response: RideDto) => {
         this.status = true;
         this.router.navigate(['dashboard']);
       },

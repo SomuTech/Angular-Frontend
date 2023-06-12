@@ -49,6 +49,7 @@ export class RegisterRideComponent implements OnInit {
   saveRide(): void {
     const rideDto: RideDto = {
       rideId: '',
+      tripId: '',
       createrUserId: this.rideForm.get('createrUserId')!.value,
       fromLoc: this.rideForm.get('fromLoc')!.value,
       rideDate: this.rideForm.get('rideDate')!.value,
@@ -60,11 +61,12 @@ export class RegisterRideComponent implements OnInit {
       numberOfSeats: this.rideForm.get('numberOfSeats')!.value,
     };
     this.service.registerRide(rideDto).subscribe(
-      (response: RideDto['rideId']) => {
+      (response: RideDto) => {
         this.status = true;
         this.router.navigate(['dashboard']);
       },
       (error) => {
+        console.log(error.message);
         this.status = false;
         this.statusResponse = error.error.message;
       }

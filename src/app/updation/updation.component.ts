@@ -187,7 +187,7 @@ export class UpdationComponent implements OnInit {
       },
       (error) => {
         this.errorResponse = error.error.message;
-        console.error(error);
+        console.error(error); 
       }
     );
   }

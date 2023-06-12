@@ -8,10 +8,10 @@
     <button class="btn btn-primary" (click)="startTrip()">Start Trip</button>
     <button class="btn btn-primary" (click)="endTrip()">End Trip</button>
   </div>
-
+<br>
   <div *ngIf="showTrips">
-    <table class="table">
-      <thead>
+    <table class="table table-bordered">
+      <thead class="table-dark">
         <tr>
           <th>Trip ID</th>
           <th>Ride Date</th>

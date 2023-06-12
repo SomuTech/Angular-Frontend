@@ -25,6 +25,7 @@ export interface RideInfoDto {
 
 export interface RideDto {
   rideId: string;
+  tripId: string;
   createrUserId: string;
   vehicleId: string;
   rideDate: string;
