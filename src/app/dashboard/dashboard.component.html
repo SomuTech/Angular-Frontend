@@ -1,44 +1,54 @@
-<div class="container">
-  <h2 class="text-center">Driver Dashboard</h2>
-
-  <button class="btn btn-primary" (click)="getBookingStatus()">Booking
-    Information</button>
-
-  <div class="text-center">
-    <button class="btn btn-primary" (click)="startTrip()">Start Trip</button>
-    <button class="btn btn-primary" (click)="endTrip()">End Trip</button>
-  </div>
+<div class="container-fluid p-1 bg-info text-center h2">
+  <p>Driver Dashboard</p>
+</div>
 <br>
-  <div *ngIf="showTrips">
-    <table class="table table-bordered">
-      <thead class="table-dark">
-        <tr>
-          <th>Trip ID</th>
-          <th>Ride Date</th>
-          <th>Ride Time</th>
-          <th>Ride Status</th>
-          <th>Seats Filled</th>
-          <th>From Location</th>
-          <th>To Location</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let trip of rideBookings">
-          <td>{{ trip.tripId }}</td>
-          <td>{{ trip.rideDate | date }}</td>
-          <td>{{ trip.rideTime }}</td>
-          <td>{{ trip.rideStatus }}</td>
-          <td>{{ trip.seatsFilled }}</td>
-          <td>{{ trip.fromLoc }}</td>
-          <td>{{ trip.toLoc }}</td>
-        </tr>
-      </tbody>
-    </table>
-
+<div class="container-fluid">
+  <div class="image-container">
+    <img src="../../assets/images/car.png" alt="Car Image" class="car-image">
   </div>
 
-  <div *ngIf="tripStarted" class="bg-success p-1 text-center text-light">
-    <p>Trip Started</p>
-  </div>
+  <div class="container">
+    <div class="container p-1 justify-content-between">
+      <div class="card bg-transparent">
+        <div
+          class="card-body bg-transparent text-center d-flex justify-content-between">
+          <button class="btn btn-primary" (click)="startTrip()">Start Trip</button>
+          <button class="btn btn-primary booking-info"
+            (click)="getBookingStatus()">Booking Information</button>
+          <button class="btn btn-primary" (click)="endTrip()">End Trip</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="showTrips">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Trip ID</th>
+            <th>Ride Date</th>
+            <th>Ride Time</th>
+            <th>Ride Status</th>
+            <th>Seats Filled</th>
+            <th>From Location</th>
+            <th>To Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trip of rideBookings">
+            <td>{{ trip.tripId }}</td>
+            <td>{{ trip.rideDate | date }}</td>
+            <td>{{ trip.rideTime }}</td>
+            <td>{{ trip.rideStatus }}</td>
+            <td>{{ trip.seatsFilled }}</td>
+            <td>{{ trip.fromLoc }}</td>
+            <td>{{ trip.toLoc }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
+    <div *ngIf="tripStarted" class="bg-success p-1 text-center text-light">
+      <p>Trip Started</p>
+    </div>
+  </div>
 </div>

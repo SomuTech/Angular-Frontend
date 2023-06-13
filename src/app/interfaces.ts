@@ -31,7 +31,7 @@ export interface RideDto {
   rideDate: string;
   rideTime: string;
   rideStatus: string;
-  seatsFilled: number;
+  // seatsFilled: number;
   fromLoc: string;
   toLoc: string;
   numberOfSeats: number;

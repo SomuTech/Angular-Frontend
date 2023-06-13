@@ -1,0 +1,13 @@
+.image-container {
+  position: relative;
+}
+
+.car-image {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.3;
+  z-index: -1;
+}

@@ -17,15 +17,11 @@
           [class.disabled-link]="!isSessionKeyPresent">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/update"
-          [class.disabled-link]="!isSessionKeyPresent">Update</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" routerLink="/register">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/smiles"
-          [class.disabled-link]="!isSessionKeyPresent">Smiles</a>
+        <a class="nav-link" routerLink="/update"
+          [class.disabled-link]="!isSessionKeyPresent">Update</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/register-ride"
@@ -35,9 +31,14 @@
         <a class="nav-link" routerLink="/update-ride"
           [class.disabled-link]="!isSessionKeyPresent">Update Ride</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/bill"
           [class.disabled-link]="!isSessionKeyPresent">Bill</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/smiles"
+          [class.disabled-link]="!isSessionKeyPresent">Smiles</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [class.disabled-link]="!isSessionKeyPresent"

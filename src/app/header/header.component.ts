@@ -12,10 +12,6 @@ export class HeaderComponent {
     this.isSessionKeyPresent = !!sessionStorage.getItem('rpId');
   }
 
-  navigateToRegistration() {
-    this.router.navigate(['/register']);
-  }
-
   logout() {
     sessionStorage.removeItem('rpId');
   }
