@@ -55,6 +55,7 @@ export class RideProvidersDataService {
   }
 
   updateRides(tripId: any, data: RideDto): Observable<RideDto> {
+    console.log(tripId);
     const url = `${this.rideProviderUrl}/bookings/${tripId}`;
     return this.http.put<RideDto>(url, data);
   }

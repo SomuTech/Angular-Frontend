@@ -47,10 +47,11 @@ export class UpdateRideComponent implements OnInit {
   }
 
   saveRide(): void {
+    // const id: string | null = sessionStorage.getItem('rpId');
     const rideDto: RideDto = {
-      rideId: this.rideForm.get('rideId')!.value,
-      tripId: '',
-      createrUserId: '',
+      rideId: '',
+      tripId: this.rideForm.get('rideId')!.value,
+      createrUserId: sessionStorage.getItem('rpId') || '',
       fromLoc: this.rideForm.get('fromLoc')!.value,
       rideDate: this.rideForm.get('rideDate')!.value,
       rideStatus: this.rideForm.get('rideStatus')!.value,
@@ -60,7 +61,7 @@ export class UpdateRideComponent implements OnInit {
       vehicleId: this.rideForm.get('vehicleId')!.value,
       numberOfSeats: this.rideForm.get('numberOfSeats')!.value,
     };
-    this.service.updateRides(rideDto['rideId'], rideDto).subscribe(
+    this.service.updateRides(rideDto['tripId'], rideDto).subscribe(
       (response: RideDto) => {
         this.status = true;
         this.router.navigate(['dashboard']);
